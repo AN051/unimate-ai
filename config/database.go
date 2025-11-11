@@ -1,22 +1,24 @@
 package config
 
 import (
+	"fmt"
 	"log"
 	"time"
 
-	"github.com/glebarez/sqlite"  // ← 改用这个纯 Go 驱动
+	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
 )
 
 var DB *gorm.DB
 
-// InitDB 初始化数据库连接（SQLite 纯 Go 版本）
 func InitDB() error {
 	var err error
+	dsn := "root:123456@tcp(localhost:3306)/unimate_ai?charset=utf8mb4&parseTime=True&loc=Local"
 	
-	// 使用 glebarez/sqlite（纯 Go 实现，不需要 CGO）
-	DB, err = gorm.Open(sqlite.Open("unimate_ai.db"), &gorm.Config{
+	log.Println("连接数据库...")
+	
+	DB, err = gorm.Open(mysql.Open(dsn), &gorm.Config{
 		Logger: logger.Default.LogMode(logger.Silent),
 		NowFunc: func() time.Time {
 			return time.Now().Local()
@@ -24,21 +26,27 @@ func InitDB() error {
 	})
 
 	if err != nil {
-		return err
+		return fmt.Errorf("数据库连接失败: %v", err)
 	}
 
-	log.Println("✅ 数据库连接成功（SQLite 本地文件 - 纯 Go 驱动）")
-	log.Println("📁 数据文件：unimate_ai.db")
+	sqlDB, err := DB.DB()
+	if err != nil {
+		return err
+	}
 	
+	sqlDB.SetMaxIdleConns(10)
+	sqlDB.SetMaxOpenConns(100)
+	sqlDB.SetConnMaxLifetime(time.Hour)
+
+	log.Println("数据库连接成功")
 	return nil
 }
 
-// AutoMigrate 自动迁移数据表
 func AutoMigrate(models ...interface{}) error {
-	log.Println("🔄 开始创建/更新数据表...")
+	log.Println("创建数据表...")
 	if err := DB.AutoMigrate(models...); err != nil {
 		return err
 	}
-	log.Println("✅ 数据表创建/更新完成")
+	log.Println("数据表创建完成")
 	return nil
 }

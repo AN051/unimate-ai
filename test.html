@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🚀 UniMate AI 接口测试</title>
+    <title>AI 学习计划</title>
     <style>
         * {
             margin: 0;
@@ -12,608 +12,497 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            padding: 20px;
+            padding: 15px;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 600px;
             margin: 0 auto;
-        }
-
-        h1 {
-            text-align: center;
-            color: white;
-            margin-bottom: 30px;
-            font-size: 2.5em;
-        }
-
-        .section {
             background: white;
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
         }
 
-        .section h2 {
-            color: #667eea;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .input-group {
-            margin-bottom: 15px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-            color: #555;
-            font-weight: 500;
-        }
-
-        input, textarea {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 14px;
-            transition: border-color 0.3s;
-        }
-
-        input:focus, textarea:focus {
-            outline: none;
-            border-color: #667eea;
-        }
-
-        textarea {
-            min-height: 100px;
-            resize: vertical;
-        }
-
-        button {
+        .header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-            margin-right: 10px;
-            margin-top: 10px;
-        }
-
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-        }
-
-        button:active {
-            transform: translateY(0);
-        }
-
-        .response {
-            background: #f8f9fa;
-            border-left: 4px solid #667eea;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 15px;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            max-height: 400px;
-            overflow-y: auto;
-        }
-
-        .error {
-            background: #fee;
-            border-left-color: #f44336;
-            color: #c62828;
-        }
-
-        .success {
-            background: #e8f5e9;
-            border-left-color: #4caf50;
-            color: #2e7d32;
-        }
-
-        .loading {
-            display: none;
+            padding: 20px;
             text-align: center;
+        }
+
+        .header h1 {
+            font-size: 22px;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 13px;
+        }
+
+        .content {
             padding: 20px;
         }
 
-        .loading.show {
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
             display: block;
-        }
-
-        .spinner {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #667eea;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .conversation-item {
-            background: white;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            border: 2px solid #e0e0e0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .conversation-info {
-            flex: 1;
-        }
-
-        .conversation-id {
-            font-size: 12px;
-            color: #999;
-            margin-bottom: 5px;
-        }
-
-        .delete-btn {
-            background: #f44336;
-            padding: 8px 16px;
+            margin-bottom: 6px;
+            color: #333;
+            font-weight: 600;
             font-size: 14px;
         }
 
-        .delete-btn:hover {
-            background: #d32f2f;
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        #result {
+            margin-top: 20px;
+            display: none;
+        }
+
+        .plan-header {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .plan-header h3 {
+            color: #667eea;
+            margin-bottom: 8px;
+            font-size: 18px;
+        }
+
+        .plan-info {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .info-item {
+            background: white;
+            padding: 8px;
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        .info-item .label {
+            font-size: 11px;
+            color: #666;
+            margin-bottom: 3px;
+        }
+
+        .info-item .value {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 20px 0 12px 0;
+            color: #333;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .stage {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            border: 2px solid #e0e0e0;
+            transition: all 0.3s;
+        }
+
+        .stage.completed {
+            border-color: #00b894;
+            background: #f0fff4;
+        }
+
+        .stage-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .stage-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            flex: 1;
+        }
+
+        .stage.completed .stage-title {
+            color: #00b894;
+        }
+
+        .stage-duration {
+            color: #00b894;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .stage-description {
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 10px;
+            font-size: 13px;
+        }
+
+        .checkbox-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .checkbox-wrapper input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: #00b894;
+        }
+
+        .checkbox-wrapper label {
+            cursor: pointer;
+            user-select: none;
+            font-size: 13px;
+            white-space: nowrap;
+        }
+
+        .evaluation-section {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            border-left: 4px solid #ff6b6b;
+        }
+
+        .evaluation-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .evaluation-header h3 {
+            color: #d63031;
+            font-size: 16px;
+        }
+
+        .score-badge {
+            background: #d63031;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        .evaluation-details {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 12px;
+            border-radius: 8px;
+            line-height: 1.6;
+            color: #2d3436;
+            margin-bottom: 10px;
+            font-size: 13px;
+        }
+
+        .key-points {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 12px;
+            border-radius: 8px;
+        }
+
+        .key-points h4 {
+            color: #d63031;
+            margin-bottom: 8px;
+            font-size: 13px;
+        }
+
+        .key-points ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .key-points li {
+            padding: 6px 0;
+            padding-left: 20px;
+            position: relative;
+            color: #2d3436;
+            font-size: 13px;
+        }
+
+        .key-points li:before {
+            content: "★";
+            position: absolute;
+            left: 0;
+            color: #fdcb6e;
+            font-size: 14px;
+        }
+
+        .token-info {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 15px;
+            text-align: center;
+            font-size: 11px;
+            color: #666;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #667eea;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🚀 UniMate AI 接口测试</h1>
-
-        <!-- AI 对话测试 -->
-        <div class="section">
-            <h2>💬 AI 对话</h2>
-            <div class="input-group">
-                <label>用户ID：</label>
-                <input type="text" id="chatUserId" value="AN051" placeholder="输入用户ID">
-            </div>
-            <div class="input-group">
-                <label>对话ID（可选，留空自动创建新对话）：</label>
-                <input type="text" id="conversationId" placeholder="留空自动创建">
-            </div>
-            <div class="input-group">
-                <label>消息内容：</label>
-                <textarea id="chatMessage" placeholder="输入你的问题...">考研数学怎么复习？</textarea>
-            </div>
-            <button onclick="sendChat()">发送对话</button>
-            <div class="loading" id="chatLoading">
-                <div class="spinner"></div>
-                <p>AI 正在思考...</p>
-            </div>
-            <div id="chatResponse"></div>
+        <div class="header">
+            <h1>🎓 AI 学习计划</h1>
+            <p>个性化学习路径规划</p>
         </div>
 
-        <!-- 获取对话列表 -->
-        <div class="section">
-            <h2>📋 对话列表</h2>
-            <div class="input-group">
-                <label>用户ID：</label>
-                <input type="text" id="listUserId" value="AN051">
-            </div>
-            <button onclick="getConversations()">获取对话列表</button>
-            <button onclick="clearAllConversations()" style="background: #f44336;">清空所有对话</button>
-            <div class="loading" id="listLoading">
-                <div class="spinner"></div>
-                <p>加载中...</p>
-            </div>
-            <div id="conversationsList"></div>
-        </div>
+        <div class="content">
+            <form id="planForm">
+                <div class="form-group">
+                    <label for="user_id">👤 用户ID</label>
+                    <input type="text" id="user_id" value="AN051" required>
+                </div>
 
-        <!-- 生成学习计划 -->
-        <div class="section">
-            <h2>📚 生成学习计划</h2>
-            <div class="input-group">
-                <label>学习目标：</label>
-                <input type="text" id="planGoal" value="学会Python爬虫" placeholder="输入学习目标">
-            </div>
-            <div class="input-group">
-                <label>当前水平（可选）：</label>
-                <input type="text" id="planLevel" value="初学者" placeholder="例如：初学者">
-            </div>
-            <div class="input-group">
-                <label>时间限制（可选）：</label>
-                <input type="text" id="planTime" value="2个月" placeholder="例如：2个月">
-            </div>
-            <button onclick="generatePlan()">生成计划</button>
-            <div class="loading" id="planLoading">
-                <div class="spinner"></div>
-                <p>正在生成计划...</p>
-            </div>
-            <div id="planResponse"></div>
-        </div>
+                <div class="form-group">
+                    <label for="flag">🎯 学习目标</label>
+                    <input type="text" id="flag" placeholder="例如：学会Python爬虫" required>
+                </div>
 
-        <!-- 目标拆解 -->
-        <div class="section">
-            <h2>🎯 目标拆解</h2>
-            <div class="input-group">
-                <label>目标：</label>
-                <input type="text" id="breakdownGoal" value="成为前端工程师" placeholder="输入大目标">
-            </div>
-            <button onclick="breakdownGoal()">拆解目标</button>
-            <div class="loading" id="breakdownLoading">
-                <div class="spinner"></div>
-                <p>正在拆解...</p>
-            </div>
-            <div id="breakdownResponse"></div>
-        </div>
+                <div class="form-group">
+                    <label for="difficulty">📊 难度</label>
+                    <select id="difficulty">
+                        <option value="初学者">初学者</option>
+                        <option value="中级">中级</option>
+                        <option value="高级">高级</option>
+                    </select>
+                </div>
 
-        <!-- 评估计划 -->
-        <div class="section">
-            <h2>⭐ 评估计划</h2>
-            <div class="input-group">
-                <label>学习计划：</label>
-                <textarea id="evaluatePlan" placeholder="粘贴你的学习计划...">第一周学语法，第二周学Pandas，第三周做项目，第四周找工作</textarea>
-            </div>
-            <button onclick="evaluatePlan()">评估计划</button>
-            <div class="loading" id="evaluateLoading">
-                <div class="spinner"></div>
-                <p>正在评估...</p>
-            </div>
-            <div id="evaluateResponse"></div>
+                <div class="form-group">
+                    <label for="deadline">📅 截止日期</label>
+                    <input type="date" id="deadline" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="daily_hours">⏰ 每日学习时长（小时）</label>
+                    <input type="number" id="daily_hours" min="1" max="24" value="3" required>
+                </div>
+
+                <button type="submit" class="btn" id="submitBtn">生成计划</button>
+            </form>
+
+            <div id="result"></div>
         </div>
     </div>
 
     <script>
-        const API_BASE = 'http://localhost:8080/api/ai';
+        let currentPlanId = null;
 
-        // 显示加载动画
-        function showLoading(id) {
-            document.getElementById(id).classList.add('show');
-        }
+        document.getElementById('deadline').valueAsDate = new Date(Date.now() + 90*24*60*60*1000);
 
-        // 隐藏加载动画
-        function hideLoading(id) {
-            document.getElementById(id).classList.remove('show');
-        }
-
-        // 显示响应
-        function showResponse(id, content, isError = false) {
-            const div = document.getElementById(id);
-            div.className = `response ${isError ? 'error' : 'success'}`;
-            div.textContent = content;
-        }
-
-        // AI 对话
-        async function sendChat() {
-            const userId = document.getElementById('chatUserId').value || 'AN051';
-            const conversationId = document.getElementById('conversationId').value;
-            const message = document.getElementById('chatMessage').value;
-
-            if (!message.trim()) {
-                alert('请输入消息内容');
-                return;
-            }
-
-            showLoading('chatLoading');
-            document.getElementById('chatResponse').textContent = '';
-
-            try {
-                const response = await fetch(`${API_BASE}/chat`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        user_id: userId,
-                        conversation_id: conversationId || undefined,
-                        message: message
-                    })
-                });
-
-                const data = await response.json();
-                hideLoading('chatLoading');
-
-                if (data.code === 200) {
-                    const result = `✅ 对话成功！
-
-对话ID: ${data.data.conversation_id}
-
-AI 回复:
-${data.data.reply}
-
-Token 使用:
-- 输入: ${data.data.token_usage.input}
-- 输出: ${data.data.token_usage.output}
-- 总计: ${data.data.token_usage.total}
-- 费用: ¥${data.data.token_usage.cost.toFixed(6)}`;
-                    
-                    showResponse('chatResponse', result);
-                    
-                    // 自动填充对话ID到输入框
-                    document.getElementById('conversationId').value = data.data.conversation_id;
-                } else {
-                    showResponse('chatResponse', `❌ 错误: ${data.message}`, true);
-                }
-            } catch (error) {
-                hideLoading('chatLoading');
-                showResponse('chatResponse', `❌ 请求失败: ${error.message}`, true);
-            }
-        }
-
-        // 获取对话列表
-        async function getConversations() {
-            const userId = document.getElementById('listUserId').value || 'AN051';
+        document.getElementById('planForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
             
-            showLoading('listLoading');
-            document.getElementById('conversationsList').innerHTML = '';
-
-            try {
-                const response = await fetch(`${API_BASE}/conversations?user_id=${userId}`);
-                const data = await response.json();
-                hideLoading('listLoading');
-
-                if (data.code === 200) {
-                    const conversations = data.data.conversations || [];
-                    
-                    if (conversations.length === 0) {
-                        document.getElementById('conversationsList').innerHTML = 
-                            '<div class="response">📭 还没有对话记录</div>';
-                        return;
-                    }
-
-                    let html = `<div class="response success">✅ 找到 ${conversations.length} 个对话</div>`;
-                    
-                    conversations.forEach(conv => {
-                        html += `
-                            <div class="conversation-item">
-                                <div class="conversation-info">
-                                    <div class="conversation-id">${conv.conversation_id}</div>
-                                    <div><strong>最后消息:</strong> ${conv.last_message || '无'}</div>
-                                    <div><strong>消息数:</strong> ${conv.message_count} 条</div>
-                                    <div><strong>更新时间:</strong> ${conv.updated_at}</div>
-                                </div>
-                                <button class="delete-btn" onclick="deleteConversation('${conv.conversation_id}')">
-                                    🗑️ 删除
-                                </button>
-                            </div>`;
-                    });
-
-                    document.getElementById('conversationsList').innerHTML = html;
-                } else {
-                    showResponse('conversationsList', `❌ 错误: ${data.message}`, true);
-                }
-            } catch (error) {
-                hideLoading('listLoading');
-                showResponse('conversationsList', `❌ 请求失败: ${error.message}`, true);
-            }
-        }
-
-        // 删除对话
-        async function deleteConversation(conversationId) {
-            if (!confirm(`确定要删除对话 ${conversationId} 吗？`)) {
-                return;
-            }
-
-            try {
-                const response = await fetch(`${API_BASE}/conversations/${conversationId}`, {
-                    method: 'DELETE'
-                });
-                
-                const data = await response.json();
-                
-                if (data.code === 200) {
-                    alert('✅ 删除成功！');
-                    getConversations(); // 刷新列表
-                } else {
-                    alert(`❌ 删除失败: ${data.message}`);
-                }
-            } catch (error) {
-                alert(`❌ 删除失败: ${error.message}`);
-            }
-        }
-
-        // 清空所有对话
-        async function clearAllConversations() {
-            const userId = document.getElementById('listUserId').value || 'AN051';
+            const submitBtn = document.getElementById('submitBtn');
+            const resultDiv = document.getElementById('result');
             
-            if (!confirm('⚠️ 确定要删除该用户的所有对话吗？此操作不可恢复！')) {
-                return;
-            }
+            submitBtn.disabled = true;
+            submitBtn.textContent = '⏳ 生成中...';
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = '<div class="loading">AI 正在生成计划...</div>';
+
+            const data = {
+                user_id: document.getElementById('user_id').value,
+                flag: document.getElementById('flag').value,
+                difficulty: document.getElementById('difficulty').value,
+                deadline: document.getElementById('deadline').value,
+                daily_hours: parseInt(document.getElementById('daily_hours').value)
+            };
 
             try {
-                // 先获取所有对话
-                const response = await fetch(`${API_BASE}/conversations?user_id=${userId}`);
-                const data = await response.json();
-
-                if (data.code === 200) {
-                    const conversations = data.data.conversations || [];
-                    
-                    if (conversations.length === 0) {
-                        alert('没有对话需要删除');
-                        return;
-                    }
-
-                    // 逐个删除
-                    let successCount = 0;
-                    for (const conv of conversations) {
-                        try {
-                            await fetch(`${API_BASE}/conversations/${conv.conversation_id}`, {
-                                method: 'DELETE'
-                            });
-                            successCount++;
-                        } catch (e) {
-                            console.error('删除失败:', conv.conversation_id, e);
-                        }
-                    }
-
-                    alert(`✅ 成功删除 ${successCount}/${conversations.length} 个对话`);
-                    getConversations(); // 刷新列表
-                }
-            } catch (error) {
-                alert(`❌ 操作失败: ${error.message}`);
-            }
-        }
-
-        // 生成学习计划
-        async function generatePlan() {
-            const goal = document.getElementById('planGoal').value;
-            const level = document.getElementById('planLevel').value;
-            const time = document.getElementById('planTime').value;
-
-            if (!goal.trim()) {
-                alert('请输入学习目标');
-                return;
-            }
-
-            showLoading('planLoading');
-            document.getElementById('planResponse').textContent = '';
-
-            try {
-                const response = await fetch(`${API_BASE}/generate-plan`, {
+                const response = await fetch('http://localhost:8080/api/ai/generate-plan', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        goal: goal,
-                        current_level: level,
-                        time_limit: time,
-                        user_id: 'AN051'
-                    })
+                    body: JSON.stringify(data)
                 });
 
-                const data = await response.json();
-                hideLoading('planLoading');
-
-                if (data.code === 200) {
-                    const result = `✅ 学习计划生成成功！
-
-${data.data.plan}
-
-💡 建议: ${data.data.suggestion}
-
-Token: ${data.data.token_usage.total} | 费用: ¥${data.data.token_usage.cost.toFixed(6)}`;
-                    
-                    showResponse('planResponse', result);
+                const result = await response.json();
+                
+                if (result.code === 200) {
+                    currentPlanId = result.data.plan_id;
+                    displayPlan(result.data);
                 } else {
-                    showResponse('planResponse', `❌ 错误: ${data.message}`, true);
+                    resultDiv.innerHTML = `<div style="color: red; padding: 20px; text-align: center;">生成失败</div>`;
                 }
             } catch (error) {
-                hideLoading('planLoading');
-                showResponse('planResponse', `❌ 请求失败: ${error.message}`, true);
+                resultDiv.innerHTML = `<div style="color: red; padding: 20px; text-align: center;">请求失败，请确保后端已启动</div>`;
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = '生成计划';
             }
+        });
+
+        function displayPlan(data) {
+            const resultDiv = document.getElementById('result');
+            
+            let html = `
+                <div class="plan-header">
+                    <h3>📚 ${data.flag}</h3>
+                    <div class="plan-info">
+                        <div class="info-item">
+                            <div class="label">难度</div>
+                            <div class="value">${data.difficulty}</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="label">截止</div>
+                            <div class="value">${data.deadline}</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="label">每日</div>
+                            <div class="value">${data.daily_hours}h</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-title">📝 学习阶段</div>
+            `;
+
+            data.stages.forEach(stage => {
+                html += `
+                    <div class="stage ${stage.is_completed ? 'completed' : ''}" id="stage-${stage.stage_id}">
+                        <div class="stage-header">
+                            <div class="stage-title">阶段 ${stage.stage_id}：${stage.stage_name}</div>
+                            <div class="checkbox-wrapper">
+                                <input 
+                                    type="checkbox" 
+                                    id="check-${stage.stage_id}" 
+                                    ${stage.is_completed ? 'checked' : ''}
+                                    onchange="toggleStage(${stage.stage_id}, this.checked)"
+                                >
+                                <label for="check-${stage.stage_id}">
+                                    ${stage.is_completed ? '已完成' : '进行中'}
+                                </label>
+                            </div>
+                        </div>
+                        <div class="stage-duration">📅 ${stage.duration}</div>
+                        <div class="stage-description">${stage.description}</div>
+                    </div>
+                `;
+            });
+
+            html += `
+                <div class="evaluation-section">
+                    <div class="evaluation-header">
+                        <h3>🤖 AI 专业评估</h3>
+                        <div class="score-badge">${data.evaluation.score} 分</div>
+                    </div>
+                    <div class="evaluation-details">
+                        ${data.evaluation.details}
+                    </div>
+                    <div class="key-points">
+                        <h4>⚡ 关键建议</h4>
+                        <ul>
+                            ${data.evaluation.key_points.map(point => `<li>${point}</li>`).join('')}
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="token-info">
+                    💰 消耗：${data.token_usage.total} tokens | ¥${data.token_usage.cost.toFixed(6)}
+                </div>
+            `;
+
+            resultDiv.innerHTML = html;
         }
 
-        // 目标拆解
-        async function breakdownGoal() {
-            const goal = document.getElementById('breakdownGoal').value;
-
-            if (!goal.trim()) {
-                alert('请输入目标');
+        async function toggleStage(stageId, isCompleted) {
+            if (!currentPlanId) {
+                alert('计划ID丢失');
                 return;
             }
 
-            showLoading('breakdownLoading');
-            document.getElementById('breakdownResponse').textContent = '';
+            const action = isCompleted ? '完成' : '取消完成';
+            if (!confirm(`确认${action}「阶段 ${stageId}」吗？`)) {
+                document.getElementById(`check-${stageId}`).checked = !isCompleted;
+                return;
+            }
 
             try {
-                const response = await fetch(`${API_BASE}/breakdown-goal`, {
-                    method: 'POST',
+                const response = await fetch(`http://localhost:8080/api/ai/plans/${currentPlanId}/stages/${stageId}`, {
+                    method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        goal: goal,
-                        user_id: 'AN051'
-                    })
+                    body: JSON.stringify({ is_completed: isCompleted })
                 });
 
-                const data = await response.json();
-                hideLoading('breakdownLoading');
+                const result = await response.json();
 
-                if (data.code === 200) {
-                    let steps = '✅ 目标拆解完成！\n\n';
+                if (result.code === 200) {
+                    const stageDiv = document.getElementById(`stage-${stageId}`);
+                    const label = document.querySelector(`label[for="check-${stageId}"]`);
                     
-                    if (Array.isArray(data.data.steps)) {
-                        steps += data.data.steps.join('\n\n');
+                    if (isCompleted) {
+                        stageDiv.classList.add('completed');
+                        label.textContent = '已完成';
                     } else {
-                        steps += data.data.steps;
+                        stageDiv.classList.remove('completed');
+                        label.textContent = '进行中';
                     }
-                    
-                    steps += `\n\n⏱️ 时间线: ${data.data.timeline}`;
-                    steps += `\n\nToken: ${data.data.token_usage.total} | 费用: ¥${data.data.token_usage.cost.toFixed(6)}`;
-                    
-                    showResponse('breakdownResponse', steps);
+
+                    alert(`✅ 更新成功！进度：${result.data.progress}`);
                 } else {
-                    showResponse('breakdownResponse', `❌ 错误: ${data.message}`, true);
+                    alert('更新失败');
+                    document.getElementById(`check-${stageId}`).checked = !isCompleted;
                 }
             } catch (error) {
-                hideLoading('breakdownLoading');
-                showResponse('breakdownResponse', `❌ 请求失败: ${error.message}`, true);
+                alert('请求失败');
+                document.getElementById(`check-${stageId}`).checked = !isCompleted;
             }
         }
-
-        // 评估计划
-        async function evaluatePlan() {
-            const plan = document.getElementById('evaluatePlan').value;
-
-            if (!plan.trim()) {
-                alert('请输入学习计划');
-                return;
-            }
-
-            showLoading('evaluateLoading');
-            document.getElementById('evaluateResponse').textContent = '';
-
-            try {
-                const response = await fetch(`${API_BASE}/evaluate-plan`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        plan: plan,
-                        user_id: 'AN051'
-                    })
-                });
-
-                const data = await response.json();
-                hideLoading('evaluateLoading');
-
-                if (data.code === 200) {
-                    let result = `✅ 计划评估完成！\n\n`;
-                    result += `评分: ${data.data.score}/100\n\n`;
-                    result += `评估内容:\n${data.data.evaluation}\n\n`;
-                    
-                    if (Array.isArray(data.data.suggestion)) {
-                        result += `💡 改进建议:\n`;
-                        data.data.suggestion.forEach((s, i) => {
-                            result += `${i + 1}. ${s}\n`;
-                        });
-                    }
-                    
-                    result += `\nToken: ${data.data.token_usage.total} | 费用: ¥${data.data.token_usage.cost.toFixed(6)}`;
-                    
-                    showResponse('evaluateResponse', result);
-                } else {
-                    showResponse('evaluateResponse', `❌ 错误: ${data.message}`, true);
-                }
-            } catch (error) {
-                hideLoading('evaluateLoading');
-                showResponse('evaluateResponse', `❌ 请求失败: ${error.message}`, true);
-            }
-        }
-
-        // 页面加载完成后自动获取对话列表
-        window.onload = function() {
-            console.log('✅ 页面加载完成，API 基础地址:', API_BASE);
-        };
     </script>
 </body>
 </html>
